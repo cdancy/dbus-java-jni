@@ -256,7 +256,10 @@ public class DBusConnection extends AbstractConnection
 							String uuid = r.readLine();
 							String homedir = System.getProperty("user.home");
 							File addressfile = new File(homedir + "/.dbus/session-bus",
-									uuid + "-" + display.replaceAll(":([0-9]*)\\..*", "$1"));
+									uuid + "-" + display.replaceAll(".*:([0-9]*)\\..*", "$1"));
+							
+							logger.trace("Search D-Bus session: {}", addressfile.getCanonicalPath());
+							
 							if (!addressfile.exists()) throw new DBusException(_("Cannot Resolve Session Bus Address"));
 							r = new BufferedReader(new FileReader(addressfile));
 							String l;

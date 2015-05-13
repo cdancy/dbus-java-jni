@@ -18,7 +18,7 @@ CLASSPATH=../../../target/classes
 
 LDVER?=$(shell ld -v | cut -d' ' -f1)
 UNAME?=$(shell uname -s)
-ARCH=$(shell uname -i)
+ARCH=$(shell uname -i | awk '{ if(index($$1,"64") !=0) {print "amd64"} else print $$1}')
 
 ifeq ($(LDVER),GNU)
 LDSHAREFLAGS+=-fpic -shared

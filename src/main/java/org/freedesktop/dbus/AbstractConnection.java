@@ -801,12 +801,16 @@ public abstract class AbstractConnection
       Vector<DBusSigHandler<? extends DBusSignal>> v = new Vector<DBusSigHandler<? extends DBusSignal>>();
       synchronized(handledSignals) {
          Vector<DBusSigHandler<? extends DBusSignal>> t;
+         
          t = handledSignals.get(new SignalTuple(s.getInterface(), s.getName(), null, null));
          if (null != t) v.addAll(t);
+         
          t = handledSignals.get(new SignalTuple(s.getInterface(), s.getName(), s.getPath(), null));
          if (null != t) v.addAll(t);
+         
          t = handledSignals.get(new SignalTuple(s.getInterface(), s.getName(), null, s.getSource()));
          if (null != t) v.addAll(t);
+         
          t = handledSignals.get(new SignalTuple(s.getInterface(), s.getName(), s.getPath(), s.getSource()));
          if (null != t) v.addAll(t);
       }

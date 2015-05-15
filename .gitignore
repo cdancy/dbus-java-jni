@@ -17,3 +17,4 @@ target/
 
 # OSX specific stuff
 .DS_Store/
+/bin/

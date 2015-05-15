@@ -51,6 +51,7 @@ public class USOutputStream extends OutputStream
    public void write(byte[][] b) throws IOException
    {
       if (closed) throw new NotConnectedException();
+//      if (b == null) throw new NullPointerException();
       native_send(sock, b);
    }
    public void write(byte[] b, int off, int len) throws IOException

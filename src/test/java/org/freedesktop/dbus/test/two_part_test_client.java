@@ -36,7 +36,7 @@ public class two_part_test_client
       two_part_test_object tpto = new two_part_test_object();
       conn.exportObject("/TestObject", tpto);
       conn.sendSignal(new TwoPartInterface.TwoPartSignal("/FromObject", tpto));
-      try { Thread.sleep(1000); } catch (InterruptedException Ie) {}
+      try { Thread.sleep(10000); } catch (InterruptedException Ie) {}
       conn.disconnect();
    }
 }

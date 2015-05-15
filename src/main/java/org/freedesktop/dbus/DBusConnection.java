@@ -348,6 +348,9 @@ public class DBusConnection extends AbstractConnection
          String[] tags = data.split("[<>]");
          Vector<String> ifaces = new Vector<String>();
          for (String tag: tags) {
+        	 //TODO: Instrospection data may be avoied assumming the return type from the 
+        	 // java interface, and its possible annotation.
+             //FIXME: Introspection data, may have spaces and the starts with fails ...
             if (tag.startsWith("interface")) {
                ifaces.add(tag.replaceAll("^interface *name *= *['\"]([^'\"]*)['\"].*$", "$1"));
             }

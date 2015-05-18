@@ -14,6 +14,10 @@ import org.freedesktop.DBus;
 import org.freedesktop.dbus.exceptions.DBusException;
 import org.freedesktop.dbus.exceptions.DBusExecutionException;
 import org.freedesktop.dbus.exceptions.NotConnected;
+import org.freedesktop.dbus.mappings.DBus2JavaMappingStrategy;
+import org.freedesktop.dbus.mappings.DBusIntrospectMember;
+import org.freedesktop.dbus.mappings.DBusIntrospectionParser;
+import org.freedesktop.dbus.mappings.DefaultDBus2JavaMappingStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -207,6 +211,16 @@ public class DBusConnection extends AbstractConnection
    private Object _reflock = new Object();
    private DBus _dbus;
 
+   
+   private static final DBusIntrospectionParser introspectionParser = new DBusIntrospectionParser(); 
+   
+   private static DBus2JavaMappingStrategy dbus2javaMapping = new DefaultDBus2JavaMappingStrategy();
+   
+   public static DBus2JavaMappingStrategy getDBus2JavaMappingStrategy() {
+       return  dbus2javaMapping;
+   }
+   
+   
    /**
     * Connect to the BUS. If a connection already exists to the specified Bus, a reference to it is returned.
     * @param address The address of the bus to connect to
@@ -345,42 +359,28 @@ public class DBusConnection extends AbstractConnection
          DBus.Introspectable intro = getRemoteObject(source, path, DBus.Introspectable.class);
          String data = intro.Introspect();
           logger.trace("Got introspection data: {}",data);
-         String[] tags = data.split("[<>]");
-         Vector<String> ifaces = new Vector<String>();
-         for (String tag: tags) {
-        	 //TODO: Instrospection data may be avoied assumming the return type from the 
-        	 // java interface, and its possible annotation.
-             //FIXME: Introspection data, may have spaces and the starts with fails ...
-            if (tag.startsWith("interface")) {
-               ifaces.add(tag.replaceAll("^interface *name *= *['\"]([^'\"]*)['\"].*$", "$1"));
-            }
-         }
-         Vector<Class<? extends Object>> ifcs = new Vector<Class<? extends Object>>();
-         for(String iface: ifaces) {
-                logger.trace("Trying interface {}",iface);
-            int j = 0;
-            while (j >= 0) {
-               try {
-                  Class ifclass = Class.forName(iface);
-                  if (!ifcs.contains(ifclass))
-                     ifcs.add(ifclass);
-                  break;
-               } catch (Exception e) {}
-               j = iface.lastIndexOf(".");
-               char[] cs = iface.toCharArray();
-               if (j >= 0) {
-                  cs[j] = '$';
-                  iface = String.valueOf(cs);
-               }
-            }
-         }
+          
+          List<DBusIntrospectMember> ifaces = introspectionParser.parseIntrospectionData(data);
+          
+          List<Class<?>> ifcs = new LinkedList<Class<?>>();
+          
+          for (DBusIntrospectMember iface : ifaces) {
+              Class<?> ifc = dbus2javaMapping.dbusName2JavaClass(iface.getName());
+              if(ifc != null) {
+                  ifcs.add(ifc);
+              } else {
+                  logger.trace("No java interface for Dbus interface {}.", iface.getName());
+              }
+          }
 
          if (ifcs.size() == 0) throw new DBusException(_("Could not find an interface to cast to"));
 
          RemoteObject ro = new RemoteObject(source, path, null, false);
+         
+         //Support all object interfaces with corresponding java, interface
          DBusInterface newi = (DBusInterface) 
             Proxy.newProxyInstance(ifcs.get(0).getClassLoader(), 
-                                   ifcs.toArray(new Class[0]), 
+                                   ifcs.toArray(new Class[ifcs.size()]), 
                                    new RemoteInvocationHandler(this, ro));
          importedObjects.put(newi, ro);
          return newi;

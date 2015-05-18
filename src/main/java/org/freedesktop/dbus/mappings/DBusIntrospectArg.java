@@ -1,4 +1,4 @@
-package org.freedesktop.dbus.resolver;
+package org.freedesktop.dbus.mappings;
 
 public class DBusIntrospectArg extends DBusIntrospectMember {
 

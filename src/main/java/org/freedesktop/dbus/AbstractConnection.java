@@ -610,10 +610,10 @@ public abstract class AbstractConnection
 
       try {
          Method me;
-         if (null == ro.iface)
+         if (null == ro.ifaces)
             me = object.getClass().getMethod(m, types);
          else
-            me = ro.iface.getMethod(m, types);
+            me = ro.findMethod(m, types);
          RemoteInvocationHandler.executeRemoteMethod(ro, me, this, RemoteInvocationHandler.CALL_TYPE_CALLBACK, callback, parameters);
       } catch (DBusExecutionException DBEe) {
           logger.debug("Dbus exception:", DBEe);
@@ -641,10 +641,10 @@ public abstract class AbstractConnection
 
       try {
          Method me;
-         if (null == ro.iface)
+         if (null == ro.ifaces)
             me = object.getClass().getMethod(m, types);
          else
-            me = ro.iface.getMethod(m, types);
+            me = ro.findMethod(m, types);
          return (DBusAsyncReply) RemoteInvocationHandler.executeRemoteMethod(ro, me, this, RemoteInvocationHandler.CALL_TYPE_ASYNC, null, parameters);
       } catch (DBusExecutionException DBEe) {
          logger.debug("Dbus exception:", DBEe);

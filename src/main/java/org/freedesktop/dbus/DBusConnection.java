@@ -362,10 +362,10 @@ public class DBusConnection extends AbstractConnection
           
           List<DBusIntrospectMember> ifaces = introspectionParser.parseIntrospectionData(data);
           
-          List<Class<?>> ifcs = new LinkedList<Class<?>>();
+          List<Class<? extends DBusInterface>> ifcs = new LinkedList<Class<? extends DBusInterface>>();
           
           for (DBusIntrospectMember iface : ifaces) {
-              Class<?> ifc = dbus2javaMapping.dbusName2JavaClass(iface.getName());
+              Class<? extends DBusInterface> ifc = (Class<? extends DBusInterface>) dbus2javaMapping.dbusName2JavaClass(iface.getName());
               if(ifc != null) {
                   ifcs.add(ifc);
               } else {
@@ -375,7 +375,8 @@ public class DBusConnection extends AbstractConnection
 
          if (ifcs.size() == 0) throw new DBusException(_("Could not find an interface to cast to"));
 
-         RemoteObject ro = new RemoteObject(source, path, null, false);
+         //Add here the interfaces to the remote object
+         RemoteObject ro = new RemoteObject(source, path, (Class<? extends DBusInterface>[]) ifcs.toArray(new Class<?>[ifcs.size()]), false);
          
          //Support all object interfaces with corresponding java, interface
          DBusInterface newi = (DBusInterface) 
@@ -632,11 +633,23 @@ public class DBusConnection extends AbstractConnection
       // valid D-Bus interface name
       if (type.getName().equals(type.getSimpleName()))
          throw new DBusException(_("DBusInterfaces cannot be declared outside a package"));
-      
-      RemoteObject ro = new RemoteObject(busname, objectpath, type, autostart);
+
+      //TODO: Check if object is not cached already
+      RemoteObject ro = new RemoteObject(busname, objectpath, (Class<? extends DBusInterface>[]) new Class<?>[]{type}, autostart);
       I i =  (I) Proxy.newProxyInstance(type.getClassLoader(), 
             new Class[] { type }, new RemoteInvocationHandler(this, ro));
+
+        /*
+         * TODO: since caching is performed on DBusInterface, using
+         * hash/interfaces for compare Remote Handler must implement the hash
+         * and compare properly, also caching should be based on the the object
+         * path and ... still if an object is not introspectable, its interface
+         * is the one provided by the java programmer, on getRemoteObject(), if
+         * not, the object should have all is interfaces provided by the dbus
+         * introspection
+         */
       importedObjects.put(i, ro);
+      
       return i;
    }
    /** 

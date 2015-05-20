@@ -89,17 +89,20 @@ final class RemoteInvocationHandler implements InvocationHandler
       if (m.isAnnotationPresent(DBus.Method.NoReply.class)) flags |= Message.Flags.NO_REPLY_EXPECTED;
       try {
          String name;
+         
+         //TODO: this bellongs to mappins logic
          if (m.isAnnotationPresent(DBusMemberName.class))
             name = m.getAnnotation(DBusMemberName.class).value();
          else
             name = m.getName();
-         if (null == ro.iface) 
+         
+         if (null == ro.ifaces)  //TODO: not sure when this happens !?
             call = new MethodCall(ro.busname, ro.objectpath, null, name,flags, sig, args);
          else {
-            if (null != ro.iface.getAnnotation(DBusInterfaceName.class)) {
-               call = new MethodCall(ro.busname, ro.objectpath, ro.iface.getAnnotation(DBusInterfaceName.class).value(), name, flags, sig, args);
-            } else
-               call = new MethodCall(ro.busname, ro.objectpath, AbstractConnection.dollar_pattern.matcher(ro.iface.getName()).replaceAll("."), name, flags, sig, args);
+             Class<?> ifc = m.getDeclaringClass();
+             //TODO: not sure if this class is the best to have this ...
+             String ifacename = DBusConnection.getDBus2JavaMappingStrategy().javaClass2DBusName(ifc);
+             call = new MethodCall(ro.busname, ro.objectpath, ifacename, name, flags, sig, args);
          }
       } catch (DBusException DBe) {
          logger.debug("Dbus exception: ", DBe);

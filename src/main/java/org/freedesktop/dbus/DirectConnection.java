@@ -213,7 +213,7 @@ public final class DirectConnection extends AbstractConnection
       if (type.getName().equals(type.getSimpleName()))
          throw new DBusException(_("DBusInterfaces cannot be declared outside a package"));
       
-      RemoteObject ro = new RemoteObject(null, objectpath, type, false);
+      RemoteObject ro = new RemoteObject(null, objectpath, (Class<? extends DBusInterface>[]) new Class<?>[]{type}, false);
       DBusInterface i =  (DBusInterface) Proxy.newProxyInstance(type.getClassLoader(), 
             new Class[] { type }, new RemoteInvocationHandler(this, ro));
       importedObjects.put(i, ro);

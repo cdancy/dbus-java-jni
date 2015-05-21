@@ -1,4 +1,4 @@
-Version 2.9.0-pre-alpha:
+Version 2.9.0-pre-alpha: (May-2015)
 
    * Add support for reverse mapping, DBus.Introspect to matching Java interface, 
      when the DBus interface name, is not the same as Java interface name.

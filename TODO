@@ -1,3 +1,6 @@
+ * (May-2015) Refactor, transformation from java classes and method invocation, to be implemented in
+ new mapping, interfaces.
+ * Add to mapping interfaces, map member (signal,property,method), map interface.
  ** check that the blocking is correct on DBusAsyncReply and add an explicit timeout value
  * document that you need to do connect; setup objects; get bus name for activation
  * dbus 'patterns', like watching for disconnects of registered listeners

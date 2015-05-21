@@ -1,3 +1,19 @@
+Version 2.9.0-pre-alpha:
+
+   * Add support for reverse mapping, DBus.Introspect to matching Java interface, 
+     when the DBus interface name, is not the same as Java interface name.
+         <mario -dot- silva -dot- costa -at- gmail -dot- com>     
+   * Add package  org.freedesktop.dbus.mappings, with xml parser classes, to parse 
+	 intropection data, and mappings interface, to maintain previous compatibility
+	 (unfinished).   
+         <mario -dot- silva -dot- costa -at- gmail -dot- com>     
+   * Add to Remote Object Java Proxy, support for all interfaces provided by, 
+     DBus.Introspect for which there is a matching Java interface.
+         <mario -dot- silva -dot- costa -at- gmail -dot- com>     
+   * Casting, Remote Object references, in return methods, signals, and properties
+     to any of their supported DBus interfaces, is now supported.
+         <mario -dot- silva -dot- costa -at- gmail -dot- com>     
+
 Version 2.8:
 
    * Patch manpage source to build with docbook2x (Patch from Alexander Kurtakov 

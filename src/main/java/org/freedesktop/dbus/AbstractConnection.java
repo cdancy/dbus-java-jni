@@ -140,6 +140,10 @@ public abstract class AbstractConnection
             "<!DOCTYPE node PUBLIC \"-//freedesktop//DTD D-BUS Object Introspection 1.0//EN\" "+
                "\"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd\">\n"+intro;
       }
+      
+    public String getObjectPath() {
+        return objectpath;
+    }
    }
    protected class _workerthread extends Thread
    {

@@ -1,5 +1,9 @@
 Version 2.9.0-pre-alpha: (May-2015)
 
+   * Added to DBusInterface getObjectPath, to have access to DBus objects path. 
+     Adapted remaining code ...
+         <mario -dot- silva -dot- costa -at- gmail -dot- com>     
+   
    * Add support for reverse mapping, DBus.Introspect to matching Java interface, 
      when the DBus interface name, is not the same as Java interface name.
          <mario -dot- silva -dot- costa -at- gmail -dot- com>     

@@ -13,6 +13,7 @@ package org.freedesktop.dbus.bin;
 import cx.ath.matthew.unix.UnixServerSocket;
 import cx.ath.matthew.unix.UnixSocket;
 import cx.ath.matthew.unix.UnixSocketAddress;
+
 import org.freedesktop.DBus;
 import org.freedesktop.dbus.*;
 import org.freedesktop.dbus.Error;
@@ -434,6 +435,7 @@ public class DBusDaemon extends Thread
          }
          logger.debug("exit");
       }
+      public String getObjectPath() { return null; }
    }
    public class Sender extends Thread
    {

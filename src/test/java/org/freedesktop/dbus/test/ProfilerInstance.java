@@ -25,4 +25,5 @@ public class ProfilerInstance implements Profiler
    public void string(String s) { return; }
    public void NoReply() { return; }
    public void Pong() { return; }
+   public String getObjectPath() {return null; }
 }

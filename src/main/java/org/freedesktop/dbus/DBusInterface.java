@@ -28,4 +28,17 @@ public interface DBusInterface
     * Local objects implementing this interface MUST return false.
     */
    public boolean isRemote();
+   
+   /**
+    * Returns the path of this Object ...
+    * TODO: a class With name ObjectPath exists, but it seems there is
+    * some confusion in the semantics.
+    * 
+    * ObjectPath implementation has a path, and a source ... not sure why
+    * the source, but its related with internal mechanics ...
+    * 
+    * @return
+    */
+   public String getObjectPath();
+   
 }

@@ -92,5 +92,6 @@ public class test_p2p_server implements TestRemoteInterface
       DirectConnection dc = new DirectConnection(address+",listen=true");
       System.out.println("Connected");
       dc.exportObject("/Test", new test_p2p_server());
-   }      
+   }
+public String getObjectPath() { return null; }      
 }

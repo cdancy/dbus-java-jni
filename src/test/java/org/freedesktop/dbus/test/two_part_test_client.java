@@ -22,6 +22,7 @@ public class two_part_test_client
          System.out.println("client name");
          return toString(); 
       }
+   public String getObjectPath() { return null; }
    }
    public static void main(String[] args) throws Exception
    {

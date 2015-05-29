@@ -15,7 +15,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -510,4 +509,5 @@ public class cross_test_client implements DBus.Binding.TestClient, DBusSigHandle
       DBe.printStackTrace();
       System.exit(1);
    }}
+   public String getObjectPath() { return null; }
 }

@@ -340,5 +340,6 @@ public class cross_test_server implements DBus.Binding.Tests, DBus.Binding.Singl
       DBe.printStackTrace();
       System.exit(1);
    }}
+   public String getObjectPath() { return null; }
 }
 

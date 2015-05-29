@@ -12,14 +12,12 @@ package org.freedesktop.dbus.test;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
-
 import java.text.Collator;
 
 import org.freedesktop.dbus.CallbackHandler;
@@ -38,7 +36,6 @@ import org.freedesktop.dbus.Variant;
 import org.freedesktop.dbus.exceptions.DBusException;
 import org.freedesktop.dbus.exceptions.DBusExecutionException;
 import org.freedesktop.dbus.exceptions.NotConnected;
-
 import org.freedesktop.DBus;
 import org.freedesktop.DBus.Error.MatchRuleInvalid;
 import org.freedesktop.DBus.Error.ServiceUnknown;
@@ -54,6 +51,7 @@ class testnewclass implements TestNewInterface
    {
       return toString();
    }
+public String getObjectPath() { return null; }
 }
 
 class testclass implements TestRemoteInterface, TestRemoteInterface2, TestSignalInterface, TestSignalInterface2, Properties
@@ -327,6 +325,7 @@ public Map<Path,Path> pathmaprv(Map<Path,Path> a) { return a; }
       properties.put("Parameters", new Variant(parameters, "a{sv}"));
       return (Map<String, Variant>) properties;
    }
+   public String getObjectPath() { return null; }
 }
 
 /**

@@ -24,6 +24,8 @@ public class two_part_test_server implements TwoPartInterface,
 			System.out.println("give name");
 			return toString();
 		}
+
+        public String getObjectPath() { return null; }
 	}
 
 	private DBusConnection conn;
@@ -65,4 +67,6 @@ public class two_part_test_server implements TwoPartInterface,
 			} catch (InterruptedException Ie) {
 			}
 	}
+
+    public String getObjectPath() { return null; }
 }

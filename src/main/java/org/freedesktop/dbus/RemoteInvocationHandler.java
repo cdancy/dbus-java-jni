@@ -156,6 +156,7 @@ final class RemoteInvocationHandler implements InvocationHandler
    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
    {
       if (method.getName().equals("isRemote")) return true;
+      else if(method.getName().equals("getObjectPath")) return remote.objectpath; 
       else if (method.getName().equals("clone")) return null;
       else if (method.getName().equals("equals")) {
          try { 

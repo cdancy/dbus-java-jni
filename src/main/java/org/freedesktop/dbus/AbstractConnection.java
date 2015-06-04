@@ -144,6 +144,11 @@ public abstract class AbstractConnection
     public String getObjectPath() {
         return objectpath;
     }
+    
+    public String GetMachineId() {
+        //TODO: Not implemented, check about this, its not meant to be exported from java-dbus, 
+        return null;
+    }
    }
    protected class _workerthread extends Thread
    {

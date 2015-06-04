@@ -436,6 +436,11 @@ public class DBusDaemon extends Thread
          logger.debug("exit");
       }
       public String getObjectPath() { return null; }
+      
+    public String GetMachineId() {
+        // TODO Not implemented, not supported by all versions of dbus, not exported in introspect xml ...
+        return null;
+    }
    }
    public class Sender extends Thread
    {

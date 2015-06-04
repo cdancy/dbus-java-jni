@@ -1,5 +1,15 @@
 Version 2.9.0-pre-alpha: (May-2015)
 
+   * Added to DBus.Peer interface method GetMachineId, to import remote objects
+     Its not supported for java-dbus exported objects, for now ...
+         <mario -dot- silva -dot- costa -at- gmail -dot- com>
+              
+   * Added to DBus.Properties interface signal PropertiesChanged, to import remote 
+     objects which support this.
+     Its not supported for java-dbus exported objects, for now ... may be issues with
+     Introspection and java, mappings (may require an annotation !?)
+         <mario -dot- silva -dot- costa -at- gmail -dot- com>     
+   
    * Added to DBusInterface getObjectPath, to have access to DBus objects path. 
      Adapted remaining code ...
          <mario -dot- silva -dot- costa -at- gmail -dot- com>     

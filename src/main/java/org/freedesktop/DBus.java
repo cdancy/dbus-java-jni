@@ -50,6 +50,7 @@ public interface DBus extends DBusInterface
    public interface Peer extends DBusInterface
    {
       public void Ping();
+      public String GetMachineId();
    }
    /**
     * Objects can provide introspection data via this interface and method.
@@ -87,7 +88,25 @@ public interface DBus extends DBusInterface
        * @return The properties mapped to their values.
        */
       public <A> Map<String, Variant<A>> GetAll (String interface_name);
+      
+      /**
+       * Messages generated when a property changes. 
+       */
+      public class PropertiesChanged extends DBusSignal
+      {
+         public final String interface_name;
+         public final Map<String,Variant> changed_properties;
+         public final List<String> invalidated_properties;
+         public PropertiesChanged(String path, String interface_name, Map<String,Variant> changed_properties, List<String> invalidated_properties) throws DBusException
+         {
+            super(path, interface_name, changed_properties, invalidated_properties);
+            this.interface_name = interface_name;
+            this.changed_properties = changed_properties;
+            this.invalidated_properties = invalidated_properties;
+         }
+      }
    }
+   
    /**
     * Messages generated locally in the application.
     */

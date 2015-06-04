@@ -1,3 +1,4 @@
+ * Check ObjectTree, and mappings, check for synergies, with mapping interfaces added. 
  * Review usage of ObjectPath, and the semantics on the DBus spec, conventional name.
  * (May-2015) Refactor, transformation from java classes and method invocation, to be implemented in
  new mapping, interfaces.

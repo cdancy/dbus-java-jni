@@ -1,4 +1,4 @@
-Package: [[artifactId]]
+Package: [[name]]
 Version: [[version]]
 Priority: standard
 Architecture: all

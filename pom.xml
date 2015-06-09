@@ -182,6 +182,7 @@
 								<goal>jdeb</goal>
 							</goals>
 							<configuration>
+								<name>lib${project.artifactId}</name>
 								<verbose>true</verbose>
 								
 								<dataSet>

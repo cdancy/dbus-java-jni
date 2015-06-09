@@ -1,5 +1,7 @@
 Version 2.9.0-pre-alpha: (May-2015)
-
+   * Added to pom, jdeb to create debian packages.
+         <mario -dot- silva -dot- costa -at- gmail -dot- com>
+         
    * Added to DBus.Peer interface method GetMachineId, to import remote objects
      Its not supported for java-dbus exported objects, for now ...
          <mario -dot- silva -dot- costa -at- gmail -dot- com>

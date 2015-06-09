@@ -1,0 +1,7 @@
+Package: [[artifactId]]
+Version: [[version]]
+Priority: standard
+Architecture: all
+Depends: libslf4j-java (>= 1.7.5), libc6 (>= 2.2.5)
+Description: [[description]]
+Maintainer: mario.silva.costa@gmail.com

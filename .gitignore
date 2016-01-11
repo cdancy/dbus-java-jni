@@ -1,5 +1,8 @@
-Java classes
+# Java classes
 *.class
+
+# Native artifacts
+*.so
 
 # Output directories
 build/

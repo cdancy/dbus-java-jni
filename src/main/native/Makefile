@@ -12,7 +12,7 @@ CSHAREFLAG+=-fpic -fno-stack-protector
 GCJJNIFLAG=-fjni
 JVERCFLAGS+=-source 1.5
 JCFLAGS+=
-INCLUDES+=-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux
+INCLUDES+=-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/freebsd
 JAVADOCFLAGS?=-quiet -author -link http://java.sun.com/j2se/1.4.2/docs/api/
 CLASSPATH=../../../target/classes
 

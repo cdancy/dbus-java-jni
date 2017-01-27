@@ -133,7 +133,7 @@
 				</executions>
 				<configuration>
 					<workingDirectory>${basedir}/src/main/native</workingDirectory>
-					<executable>make</executable>
+					<executable>gmake</executable>
 				</configuration>
 			</plugin>
 		</plugins>

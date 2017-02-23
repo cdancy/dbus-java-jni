@@ -95,9 +95,9 @@ public interface DBus extends DBusInterface
       public class PropertiesChanged extends DBusSignal
       {
          public final String interface_name;
-         public final Map<String,Variant> changed_properties;
+         public final Map<String, Variant<?>> changed_properties;
          public final List<String> invalidated_properties;
-         public PropertiesChanged(String path, String interface_name, Map<String,Variant> changed_properties, List<String> invalidated_properties) throws DBusException
+         public PropertiesChanged(String path, String interface_name, Map<String, Variant<?>> changed_properties, List<String> invalidated_properties) throws DBusException
          {
             super(path, interface_name, changed_properties, invalidated_properties);
             this.interface_name = interface_name;
